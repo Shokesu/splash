@@ -2,42 +2,19 @@
 Splash - A javascript rendering service
 =======================================
 
-.. image:: https://img.shields.io/travis/scrapinghub/splash/master.svg
-   :alt: Build Status
-   :target: https://travis-ci.org/scrapinghub/splash
+This is a fork from this github repository: https://github.com/scrapinghub/splash
+It has been modified in order to deploy splash docker image on Heroku (https://dashboard.heroku.com):
 
-.. image:: https://img.shields.io/codecov/c/github/scrapinghub/splash/master.svg
-   :alt: Coverage report
-   :target: http://codecov.io/github/scrapinghub/splash?branch=master
 
-.. image:: https://img.shields.io/badge/GITTER-join%20chat-green.svg
-   :alt: Join the chat at https://gitter.im/scrapinghub/splash
-   :target: https://gitter.im/scrapinghub/splash
+- Removed command EXPOSE on Dockerfile because it's not supported by Heroku
+- Replaced ENTRYPOINT by CMD command. The CMD command executes a bash script called "run.sh" (https://github.com/Shokesu/splash/blob/master/run.sh) which runs the splash server with python
 
-Splash is a javascript rendering service with an HTTP API. It's a lightweight
-browser with an HTTP API, implemented in Python 3 using Twisted and QT5.
+- Added the option --port=$PORT when running the splash server, to listen at the port specified by Heroku instead of the default (8050)
 
-It's fast, lightweight and state-less which makes it easy to distribute.
+That's all.
 
-Documentation
--------------
+You can test docker image locally. When running the image, you must pass the environment variable "PORT"
 
-Documentation is available here:
-https://splash.readthedocs.io/
 
-Using Splash with Scrapy
-------------------------
 
-To use Splash with Scrapy, please refer to the `scrapy-splash library`_.
 
-Support
--------
-
-Open source support is provided here in GitHub. Please `create a question
-issue`_.
-
-Commercial support is also available by `Scrapinghub`_.
-
-.. _create a question issue: https://github.com/scrapinghub/splash/issues/new?labels=question
-.. _Scrapinghub: https://scrapinghub.com
-.. _scrapy-splash library: https://github.com/scrapy-plugins/scrapy-splash
